@@ -1,0 +1,166 @@
+﻿@model IEnumerable<Canteen_Management_System.Models.Attendance>
+@{
+    int i = 0;
+    ViewBag.Title = "View_Attendance";
+    var alias = Model.FirstOrDefault().Alias;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        @*<form>*@
+        <div class="row mb-3 align-items-center">
+            <div class="col-sm-12">
+                <div class="d-flex w-100">
+                    <div class="col-sm-2">
+                        <h5 for="aliasName" class="fw-bolder text-secondary">AliasName</h5>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        <h5 for="breakfast" class="fw-bolder text-secondary">Date</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="breakfast" class="fw-bolder text-secondary">Breakfast</h5>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        <h5 for="lunch" class="fw-bolder text-secondary">Lunch</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="dinner" class="fw-bolder text-secondary">Dinner</h5>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        <h5 for="extra" class="fw-bolder text-secondary">Extra</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="extraPrice" class="fw-bolder text-secondary">Extra Cost</h5>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        <h5 for="totalPrice" class="fw-bolder text-secondary">Total Cost</h5>
+                    </div>
+
+                </div>
+            </div>
+            @foreach (var cust in Model)
+            {
+                i++;
+                <div class="col-sm-12 pt-1 pb-1 @(i % 2 == 0 ? "bg-green" : "bg-light-gray")">
+                    <div class="d-flex w-100 align-items-center">
+                        <div class="col-sm-2">
+                            <label class="alias-name">@cust.Alias </label>
+                        </div>
+                        <div class="col-sm-1 text-center">
+                            <label class="alias-name ">@cust.Date.ToString().Split(' ')[0]</label>
+                        </div>
+                        <div class="col-sm-2 text-center d-flex justify-content-center align-items-center">
+                            <div class="d-flex me-3 gap-4 justify-content-center">
+                                @if (cust.Break_First == "Yes")
+                                {
+                                    <label class=" bg-success fw-bolder text-white btn-att">YES</label>
+                                }
+                                else
+                                {
+                                    <label class=" bg-danger fw-bolder text-white btn-att">NO</label>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-sm-1 text-center d-flex justify-content-center align-items-center">
+                            <div class="d-flex me-3 gap-4 justify-content-center">
+                                @if (cust.Lunch == "Yes")
+                                {
+                                    <label class=" bg-success fw-bolder text-white btn-att">YES</label>
+                                }
+                                else
+                                {
+                                    <label class=" bg-danger fw-bolder text-white btn-att">NO</label>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-sm-2 text-center d-flex justify-content-center align-items-center">
+                            <div class="d-flex me-3 gap-4 justify-content-center align-items-center">
+                                @if (cust.Dinner == "Yes")
+                                {
+                                    <label class=" bg-success fw-bolder text-white btn-att">YES</label>
+                                }
+                                else
+                                {
+                                    <label class=" bg-danger fw-bolder text-white btn-att">NO</label>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-sm-1 text-center">
+                            @if (cust.Extra == null)
+                            {
+                                <div class="d-flex me-3 justify-content-center ">
+                                    @*@Html.DropDownList("", ViewBag.Extra as SelectList, "--Select--", new { @class = "form-control" })*@
+                                    <label>---</label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex me-3 justify-content-center">
+                                    @*@Html.DropDownList("", ViewBag.Extra as SelectList, "--Select--", new { @class = "form-control" })*@
+                                    <label>@cust.Extra</label>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-sm-2 text-center d-flex justify-content-center">
+                            <div class="d-flex me-3 align-items-center justify-content-center">
+                                @*<input type="text" class="form-control w-75" id="extraPrice_@cust.Alias" placeholder="Enter extra price" required>*@
+                                <lable class="form-control w-100">@cust.Extra_Price</lable>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 text-center d-flex justify-content-center">
+                            <div class="d-flex me-3 align-items-center justify-content-center">
+                                <lable class="form-control w-100 ">
+                                    @cust.Total_Price
+                                </lable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-sm-12 pt-1 pb-1  bg-success-subtle">
+                <div class="d-flex w-100 align-items-center">
+                    <div class="col-sm-12 text-center">
+                        <b class="">Monthly Grand Total : </b>
+                        <label class="">₹ @ViewBag.Monthly</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="d-flex align-items-center w-100 justify-content-center">
+        @if (Session["admin"] != null)
+        {
+            <div class="d-flex gap-2 justify-content-center btn-container w-100">
+                @Ajax.ActionLink("1", "ViewAttendanceRec", "Admin", new { month = 1, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("2", "ViewAttendanceRec", "Admin", new { month = 2, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("3", "ViewAttendanceRec", "Admin", new { month = 3, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("4", "ViewAttendanceRec", "Admin", new { month = 4, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("5", "ViewAttendanceRec", "Admin", new { month = 5, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("6", "ViewAttendanceRec", "Admin", new { month = 6, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("7", "ViewAttendanceRec", "Admin", new { month = 7, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("8", "ViewAttendanceRec", "Admin", new { month = 8, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("9", "ViewAttendanceRec", "Admin", new { month = 9, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("10", "ViewAttendanceRec", "Admin", new { month = 10, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("11", "ViewAttendanceRec", "Admin", new { month = 11, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+                @Ajax.ActionLink("12", "ViewAttendanceRec", "Admin", new { month = 12, alias = alias }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger" })
+            </div>
+        }
+        
+    </div>
+</body>
+</html>
+
+

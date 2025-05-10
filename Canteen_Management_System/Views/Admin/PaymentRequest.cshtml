@@ -1,0 +1,158 @@
+﻿@model List<Canteen_Management_System.Models.OnlinePayment>
+@{
+    ViewBag.Title = "PaymentRequest";
+}
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<style>
+        .container {
+            padding: 16px;
+            /*text-align: center;*/
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(100, 100, 100, 0.5);
+            backdrop-filter: blur(50%);
+            padding-top: 50px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Style the horizontal ruler */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* The Modal Close Button (x) */
+        .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #f1f1f1;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #f44336;
+                cursor: pointer;
+            }
+
+        /* Clear floats */
+        .clearfix {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+        /* .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    } */
+        .btn-cont {
+            display: flex;
+            justify-content: space-around;
+        }
+</style>
+
+<div id="successMessage">@TempData["successMessage"]</div>
+<div id="warningMessage">@TempData["warningMessage"]</div>
+
+<div class="container my-5">
+    @*<form>*@
+    <div class="row mb-3 align-items-center">
+        <div class="col-sm-12">
+            <div class="d-flex w-100">
+                <div class="col-sm-3">
+                    <h5 class="fw-bolder text-secondary">AliasName</h5>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <h5 class="fw-bolder text-secondary">Amount</h5>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <h5 class="fw-bolder text-secondary">Snap</h5>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <h5 class="fw-bolder text-secondary">Action</h5>
+                </div>
+
+            </div>
+            @foreach (var req in Model)
+            {
+                <div class="d-flex w-100 mb-1">
+                    <div class="col-sm-3">
+                        @req.Alias
+                    </div>
+                    <div class="col-sm-3 text-center">
+                        <label class="fw-bolder">@req.Amount</label>
+                    </div>
+                    <div class="col-sm-3 text-center">
+                        <label class="view-btn place-order" data-alias="@req.Alias">View <i class="fa-regular fa-image"></i></label>
+                    </div>
+                    <div class="col-sm-3 text-center">
+                        @Html.ActionLink("Approve", "PaymentAccept", "Admin", new { alias = req.Alias, amount = req.Amount, req_id = req.Op_Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Reject", "PaymentReject", "Admin", new { req_id = req.Op_Id, alias = req.Alias }, new { @class = "btn btn-warning" })
+
+                    </div>
+                </div>
+                <center class="modal w-100 align-items-center justify-content-center view-img a_@req.Alias">
+                    <span class="close" title="Close Modal">&times;</span>
+                    <div class="modal-content">
+                        <div class="container d-flex flex-column align-items-center justify-content-center gap-4">
+                            <h2 class="text-center">Snap Prove</h2>
+                            <br><br>
+                            <img src="@Url.Content(req.Image)" class="w-75" />
+                            <br>
+                            <div class="btn-cont">
+                                <label type="button" class="btn btn-primary close-modal">Close</label>
+                            </div>
+                        </div>
+                    </div>
+                </center>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Open the modal when "Place Order" button is clicked
+        $('.view-btn').click(function () {
+            var alias = $(this).data('alias'); // Get the alias from the button
+            $('.view-img.a_' + alias).css('display', 'flex'); // Show the corresponding modal
+        });
+
+        // Close the modal when the close button (X) is clicked
+        $('.close').click(function () {
+            $(this).closest('.view-img').css('display', 'none'); // Hide the modal
+        });
+
+        // Close the modal when the close modal button is clicked
+        $('.close-modal').click(function () {
+            $(this).closest('.view-img').css('display', 'none'); // Hide the modal
+        });
+
+        // Close the modal when clicking outside the modal content
+        $(window).click(function (event) {
+            if ($(event.target).hasClass('view-img')) {
+                $(event.target).css('display', 'none'); // Hide the modal if clicked outside
+            }
+        });
+    });
+
+</script>

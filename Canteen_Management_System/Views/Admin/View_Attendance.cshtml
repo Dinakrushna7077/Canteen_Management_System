@@ -1,0 +1,37 @@
+﻿@using Canteen_Management_System.Models
+@model Attendance
+@{
+    ViewBag.Title = "View_Attendance";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <style>
+    </style>
+</head>
+<body>
+    <div id="successMessage">@TempData["successMessage"]</div>
+    <div id="warningMessage">@TempData["warningMessage"]</div>
+    <div class="d-flex align-items-center w-100 justify-content-center">
+        @using (Ajax.BeginForm("ViewAttendanceRec", "Admin", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="d-flex gap-4 justify-content-center btn-container w-100">
+                <input type="text" id="alias" name="alias" class="form-control" placeholder="Enter Canteen Number" />
+                @*@Html.TextBoxFor(m => m.Alias, new { @class = "form-control", placeholder = "Enter Canteen Number" })*@
+                <button class="w-50 btn btn-success">Check Out</button>
+            </div>
+        }
+    </div>
+    <div id="att-target">
+
+    </div>
+</body>
+</html>
+

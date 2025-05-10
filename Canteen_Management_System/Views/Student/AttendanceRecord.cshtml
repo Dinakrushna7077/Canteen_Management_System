@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "AttendanceRecord";
+}
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+<html>
+<head>
+
+</head>
+<body class="vh-100">
+
+    <div id="successMessage">@TempData["successMessage"]</div>
+    <div id="warningMessage">@TempData["warningMessage"]</div>
+    <div class="d-flex align-items-center w-100 justify-content-center">
+        <div class="d-flex gap-2 justify-content-center btn-container w-100">
+            @for (int i = 1; i <= 12; i++)
+            {
+                @Ajax.ActionLink(i.ToString(), "ViewAttendanceRec", "Student", new { month = i }, new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }, new { @class = "btn btn-outline-danger", @id = "month-" + i })
+            }
+        </div>
+    </div>
+    <div id="att-target">
+
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var currentMonth = new Date().getMonth() + 1;
+            var currentMonthLinkId = '#month-' + currentMonth;
+            $(currentMonthLinkId).click();
+            console.log(currentMonthLinkId);
+
+        });
+
+    </script>
+
+</body>
+</html>

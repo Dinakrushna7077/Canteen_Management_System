@@ -1,0 +1,997 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Canteen_ManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin_Mst">
+          <Key>
+            <PropertyRef Name="A_Id" />
+          </Key>
+          <Property Name="A_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Amount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="10" />
+          <Property Name="Total_Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="Att_Id" />
+          </Key>
+          <Property Name="Att_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="10" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Break_First" Type="varchar" MaxLength="5" />
+          <Property Name="Lunch" Type="varchar" MaxLength="5" />
+          <Property Name="Dinner" Type="varchar" MaxLength="5" />
+          <Property Name="Extra" Type="varchar" MaxLength="50" />
+          <Property Name="Extra_Price" Type="float" />
+          <Property Name="Total_Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Alias" />
+          </Key>
+          <Property Name="Alias" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="Honours" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="College_Roll" Type="varchar" MaxLength="15" />
+          <Property Name="Address" Type="varchar(max)" Nullable="false" />
+          <Property Name="Guardian_Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="Meal_Status" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Mobile" Type="bigint" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Extra_Item">
+          <Key>
+            <PropertyRef Name="Ex_Id" />
+          </Key>
+          <Property Name="Ex_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="Meal_Id" />
+          </Key>
+          <Property Name="Meal_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="10" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Reason" Type="varchar" MaxLength="50" />
+          <Property Name="Limit" Type="int" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Day" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Break_First" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lunch" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dinner" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Extra" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Monthly_Due">
+          <Key>
+            <PropertyRef Name="Md_Id" />
+          </Key>
+          <Property Name="Md_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Month" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="OnlinePayment">
+          <Key>
+            <PropertyRef Name="Op_Id" />
+          </Key>
+          <Property Name="Op_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="10" />
+          <Property Name="Tran_Id" Type="varchar(max)" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" Nullable="false" />
+          <Property Name="Pay_Status" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Payment_Details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="10" />
+          <Property Name="Total_Amt" Type="float" />
+          <Property Name="Paid_Amt" Type="float" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Received_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Payment_Mode" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Public_Query">
+          <Key>
+            <PropertyRef Name="Q_id" />
+          </Key>
+          <Property Name="Q_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Mobile" Type="bigint" />
+          <Property Name="G_Mail" Type="varchar(max)" />
+          <Property Name="Query" Type="varchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Canteen_Management.dbo.Attendance_Mng_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Attendance_Mng_View">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Alias" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Meal_Status" Type="varchar" MaxLength="10" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Break_First" Type="varchar" MaxLength="5" />
+          <Property Name="Lunch" Type="varchar" MaxLength="5" />
+          <Property Name="Dinner" Type="varchar" MaxLength="5" />
+          <Property Name="Extra" Type="varchar" MaxLength="50" />
+          <Property Name="Extra_Price" Type="float" />
+          <Property Name="Total_Price" Type="float" />
+          <Property Name="Att_Id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Canteen_Management.dbo.Attendance_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Attendance_View">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Alias" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Meal_Status" Type="varchar" MaxLength="10" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Break_First" Type="varchar" MaxLength="5" />
+          <Property Name="Lunch" Type="varchar" MaxLength="5" />
+          <Property Name="Dinner" Type="varchar" MaxLength="5" />
+          <Property Name="Extra" Type="varchar" MaxLength="50" />
+          <Property Name="Extra_Price" Type="float" />
+          <Property Name="Total_Price" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Canteen_Management.dbo.Customer_Due' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customer_Due">
+          <Key>
+            <PropertyRef Name="Alias" />
+          </Key>
+          <Property Name="Alias" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Total_Price" Type="float" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Paid_Amt" Type="float" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Payment_Mode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Canteen_Management.dbo.Customer_Meal_Operation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Customer_Meal_Operation">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Alias" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Meal_Status" Type="varchar" MaxLength="10" />
+          <Property Name="Req_Meal_Status" Type="varchar" MaxLength="10" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Limit" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Canteen_Management.dbo.Meal_OnOff' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Meal_OnOff">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Alias" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Meal_Status" Type="varchar" MaxLength="10" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Reason" Type="varchar" MaxLength="50" />
+          <Property Name="Limit" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Canteen_Management.dbo.PaymentDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PaymentDetails">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Received_By" />
+            <PropertyRef Name="Payment_Mode" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Alias" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Total_Amt" Type="float" />
+          <Property Name="Paid_Amt" Type="float" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Received_By" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Payment_Mode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Total_Price" Type="float" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Amount__Alias__45F365D3">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Amount" Type="Self.Amount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="Amount">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attendanc__Alias__76969D2E">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meal__Alias__5FB337D6">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Meal" Type="Self.Meal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="Meal">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Monthly_D__Alias__18EBB532">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Monthly_Due" Type="Self.Monthly_Due" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="Monthly_Due">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OnlinePay__Alias__160F4887">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="OnlinePayment" Type="Self.OnlinePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="OnlinePayment">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Canteen_ManagementModelStoreContainer">
+          <EntitySet Name="Admin_Mst" EntityType="Self.Admin_Mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Amount" EntityType="Self.Amount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Extra_Item" EntityType="Self.Extra_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Monthly_Due" EntityType="Self.Monthly_Due" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OnlinePayment" EntityType="Self.OnlinePayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment_Details" EntityType="Self.Payment_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Public_Query" EntityType="Self.Public_Query" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendance_Mng_View" EntityType="Self.Attendance_Mng_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Attendance_Mng_View].[Alias] AS [Alias], 
+    [Attendance_Mng_View].[Name] AS [Name], 
+    [Attendance_Mng_View].[Meal_Status] AS [Meal_Status], 
+    [Attendance_Mng_View].[Date] AS [Date], 
+    [Attendance_Mng_View].[Break_First] AS [Break_First], 
+    [Attendance_Mng_View].[Lunch] AS [Lunch], 
+    [Attendance_Mng_View].[Dinner] AS [Dinner], 
+    [Attendance_Mng_View].[Extra] AS [Extra], 
+    [Attendance_Mng_View].[Extra_Price] AS [Extra_Price], 
+    [Attendance_Mng_View].[Total_Price] AS [Total_Price], 
+    [Attendance_Mng_View].[Att_Id] AS [Att_Id]
+    FROM [dbo].[Attendance_Mng_View] AS [Attendance_Mng_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Attendance_View" EntityType="Self.Attendance_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Attendance_View].[Alias] AS [Alias], 
+    [Attendance_View].[Name] AS [Name], 
+    [Attendance_View].[Meal_Status] AS [Meal_Status], 
+    [Attendance_View].[Date] AS [Date], 
+    [Attendance_View].[Break_First] AS [Break_First], 
+    [Attendance_View].[Lunch] AS [Lunch], 
+    [Attendance_View].[Dinner] AS [Dinner], 
+    [Attendance_View].[Extra] AS [Extra], 
+    [Attendance_View].[Extra_Price] AS [Extra_Price], 
+    [Attendance_View].[Total_Price] AS [Total_Price]
+    FROM [dbo].[Attendance_View] AS [Attendance_View]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Customer_Due" EntityType="Self.Customer_Due" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customer_Due].[Alias] AS [Alias], 
+    [Customer_Due].[Total_Price] AS [Total_Price], 
+    [Customer_Due].[Month] AS [Month], 
+    [Customer_Due].[Amount] AS [Amount], 
+    [Customer_Due].[Paid_Amt] AS [Paid_Amt], 
+    [Customer_Due].[Date] AS [Date], 
+    [Customer_Due].[Payment_Mode] AS [Payment_Mode]
+    FROM [dbo].[Customer_Due] AS [Customer_Due]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Customer_Meal_Operation" EntityType="Self.Customer_Meal_Operation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Customer_Meal_Operation].[Alias] AS [Alias], 
+    [Customer_Meal_Operation].[Name] AS [Name], 
+    [Customer_Meal_Operation].[Meal_Status] AS [Meal_Status], 
+    [Customer_Meal_Operation].[Req_Meal_Status] AS [Req_Meal_Status], 
+    [Customer_Meal_Operation].[Date] AS [Date], 
+    [Customer_Meal_Operation].[Limit] AS [Limit]
+    FROM [dbo].[Customer_Meal_Operation] AS [Customer_Meal_Operation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Meal_OnOff" EntityType="Self.Meal_OnOff" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Meal_OnOff].[Alias] AS [Alias], 
+    [Meal_OnOff].[Name] AS [Name], 
+    [Meal_OnOff].[Meal_Status] AS [Meal_Status], 
+    [Meal_OnOff].[Status] AS [Status], 
+    [Meal_OnOff].[Date] AS [Date], 
+    [Meal_OnOff].[Reason] AS [Reason], 
+    [Meal_OnOff].[Limit] AS [Limit]
+    FROM [dbo].[Meal_OnOff] AS [Meal_OnOff]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PaymentDetails" EntityType="Self.PaymentDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PaymentDetails].[Alias] AS [Alias], 
+    [PaymentDetails].[Total_Amt] AS [Total_Amt], 
+    [PaymentDetails].[Paid_Amt] AS [Paid_Amt], 
+    [PaymentDetails].[Date] AS [Date], 
+    [PaymentDetails].[Received_By] AS [Received_By], 
+    [PaymentDetails].[Payment_Mode] AS [Payment_Mode], 
+    [PaymentDetails].[Total_Price] AS [Total_Price], 
+    [PaymentDetails].[Id] AS [Id]
+    FROM [dbo].[PaymentDetails] AS [PaymentDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Amount__Alias__45F365D3" Association="Self.FK__Amount__Alias__45F365D3">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Amount" EntitySet="Amount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attendanc__Alias__76969D2E" Association="Self.FK__Attendanc__Alias__76969D2E">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meal__Alias__5FB337D6" Association="Self.FK__Meal__Alias__5FB337D6">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Meal" EntitySet="Meal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Monthly_D__Alias__18EBB532" Association="Self.FK__Monthly_D__Alias__18EBB532">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Monthly_Due" EntitySet="Monthly_Due" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OnlinePay__Alias__160F4887" Association="Self.FK__OnlinePay__Alias__160F4887">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="OnlinePayment" EntitySet="OnlinePayment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Canteen_ManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin_Mst">
+          <Key>
+            <PropertyRef Name="A_Id" />
+          </Key>
+          <Property Name="A_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Amount">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Price" Type="Double" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Amount__Alias__45F365D3" FromRole="Amount" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Alias" />
+          </Key>
+          <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Honours" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="College_Roll" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Guardian_Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Amounts" Relationship="Self.FK__Amount__Alias__45F365D3" FromRole="Customer" ToRole="Amount" />
+          <NavigationProperty Name="Meals" Relationship="Canteen_ManagementModel.FK__Meal__Alias__5FB337D6" FromRole="Customer" ToRole="Meal" />
+          <Property Name="Meal_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Attendances" Relationship="Canteen_ManagementModel.FK__Attendanc__Alias__76969D2E" FromRole="Customer" ToRole="Attendance" />
+          <NavigationProperty Name="OnlinePayments" Relationship="Canteen_ManagementModel.FK__OnlinePay__Alias__160F4887" FromRole="Customer" ToRole="OnlinePayment" />
+          <NavigationProperty Name="Monthly_Due" Relationship="Canteen_ManagementModel.FK__Monthly_D__Alias__18EBB532" FromRole="Customer" ToRole="Monthly_Due" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="Int64" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Day" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Break_First" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lunch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dinner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Extra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment_Details">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Amt" Type="Double" />
+          <Property Name="Paid_Amt" Type="Double" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Received_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Payment_Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Amount__Alias__45F365D3">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Amount" Type="Self.Amount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="Amount">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Canteen_ManagementEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin_Mst" EntityType="Self.Admin_Mst" />
+          <EntitySet Name="Amounts" EntityType="Self.Amount" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Payment_Details" EntityType="Self.Payment_Details" />
+          <AssociationSet Name="FK__Amount__Alias__45F365D3" Association="Self.FK__Amount__Alias__45F365D3">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Amount" EntitySet="Amounts" />
+          </AssociationSet>
+          <EntitySet Name="Meals" EntityType="Canteen_ManagementModel.Meal" />
+          <AssociationSet Name="FK__Meal__Alias__5FB337D6" Association="Canteen_ManagementModel.FK__Meal__Alias__5FB337D6">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Meal" EntitySet="Meals" />
+          </AssociationSet>
+          <EntitySet Name="Extra_Item" EntityType="Canteen_ManagementModel.Extra_Item" />
+          <EntitySet Name="Attendances" EntityType="Canteen_ManagementModel.Attendance" />
+          <AssociationSet Name="FK__Attendanc__Alias__76969D2E" Association="Canteen_ManagementModel.FK__Attendanc__Alias__76969D2E">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <EntitySet Name="Attendance_Mng_View" EntityType="Canteen_ManagementModel.Attendance_Mng_View" />
+          <EntitySet Name="Attendance_View" EntityType="Canteen_ManagementModel.Attendance_View" />
+          <EntitySet Name="Meal_OnOff" EntityType="Canteen_ManagementModel.Meal_OnOff" />
+          <EntitySet Name="Customer_Meal_Operation" EntityType="Canteen_ManagementModel.Customer_Meal_Operation" />
+          <EntitySet Name="OnlinePayments" EntityType="Canteen_ManagementModel.OnlinePayment" />
+          <AssociationSet Name="FK__OnlinePay__Alias__160F4887" Association="Canteen_ManagementModel.FK__OnlinePay__Alias__160F4887">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="OnlinePayment" EntitySet="OnlinePayments" />
+          </AssociationSet>
+          <EntitySet Name="Monthly_Due" EntityType="Canteen_ManagementModel.Monthly_Due" />
+          <AssociationSet Name="FK__Monthly_D__Alias__18EBB532" Association="Canteen_ManagementModel.FK__Monthly_D__Alias__18EBB532">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Monthly_Due" EntitySet="Monthly_Due" />
+          </AssociationSet>
+          <EntitySet Name="Customer_Due" EntityType="Canteen_ManagementModel.Customer_Due" />
+          <EntitySet Name="Public_Query" EntityType="Canteen_ManagementModel.Public_Query" />
+          <EntitySet Name="PaymentDetails" EntityType="Canteen_ManagementModel.PaymentDetail" />
+        </EntityContainer>
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="Meal_Id" />
+          </Key>
+          <Property Name="Meal_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Limit" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Canteen_ManagementModel.FK__Meal__Alias__5FB337D6" FromRole="Meal" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK__Meal__Alias__5FB337D6">
+          <End Type="Canteen_ManagementModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Canteen_ManagementModel.Meal" Role="Meal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="Meal">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Extra_Item">
+          <Key>
+            <PropertyRef Name="Ex_Id" />
+          </Key>
+          <Property Name="Ex_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="Att_Id" />
+          </Key>
+          <Property Name="Att_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Break_First" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Lunch" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Dinner" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Extra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Extra_Price" Type="Double" />
+          <Property Name="Total_Price" Type="Double" />
+          <NavigationProperty Name="Customer" Relationship="Canteen_ManagementModel.FK__Attendanc__Alias__76969D2E" FromRole="Attendance" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK__Attendanc__Alias__76969D2E">
+          <End Type="Canteen_ManagementModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Canteen_ManagementModel.Attendance" Role="Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Attendance_Mng_View">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Meal_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Break_First" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Lunch" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Dinner" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Extra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Extra_Price" Type="Double" />
+          <Property Name="Total_Price" Type="Double" />
+          <Property Name="Att_Id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Attendance_View">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Meal_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Break_First" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Lunch" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Dinner" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Extra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Extra_Price" Type="Double" />
+          <Property Name="Total_Price" Type="Double" />
+        </EntityType>
+        <EntityType Name="Meal_OnOff">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Meal_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Limit" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Customer_Meal_Operation">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Meal_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Req_Meal_Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Limit" Type="Int32" />
+        </EntityType>
+        <EntityType Name="OnlinePayment">
+          <Key>
+            <PropertyRef Name="Op_Id" />
+          </Key>
+          <Property Name="Op_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tran_Id" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Canteen_ManagementModel.FK__OnlinePay__Alias__160F4887" FromRole="OnlinePayment" ToRole="Customer" />
+          <Property Name="Pay_Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__OnlinePay__Alias__160F4887">
+          <End Type="Canteen_ManagementModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="Canteen_ManagementModel.OnlinePayment" Role="OnlinePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="OnlinePayment">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Monthly_Due">
+          <Key>
+            <PropertyRef Name="Md_Id" />
+          </Key>
+          <Property Name="Md_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Canteen_ManagementModel.FK__Monthly_D__Alias__18EBB532" FromRole="Monthly_Due" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK__Monthly_D__Alias__18EBB532">
+          <End Type="Canteen_ManagementModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Canteen_ManagementModel.Monthly_Due" Role="Monthly_Due" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Alias" />
+            </Principal>
+            <Dependent Role="Monthly_Due">
+              <PropertyRef Name="Alias" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Customer_Due">
+          <Key>
+            <PropertyRef Name="Alias" />
+          </Key>
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Price" Type="Double" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Paid_Amt" Type="Double" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Payment_Mode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Public_Query">
+          <Key>
+            <PropertyRef Name="Q_id" />
+          </Key>
+          <Property Name="Q_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="Int64" />
+          <Property Name="G_Mail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Query" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PaymentDetail">
+          <Key>
+            <PropertyRef Name="Alias" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Received_By" />
+            <PropertyRef Name="Payment_Mode" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Amt" Type="Double" />
+          <Property Name="Paid_Amt" Type="Double" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Received_By" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Payment_Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Price" Type="Double" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Canteen_ManagementModelStoreContainer" CdmEntityContainer="Canteen_ManagementEntities1">
+          <EntitySetMapping Name="Admin_Mst">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Admin_Mst">
+              <MappingFragment StoreEntitySet="Admin_Mst">
+                <ScalarProperty Name="A_Id" ColumnName="A_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Amounts">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Amount">
+              <MappingFragment StoreEntitySet="Amount">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Meal_Status" ColumnName="Meal_Status" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Honours" ColumnName="Honours" />
+                <ScalarProperty Name="College_Roll" ColumnName="College_Roll" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Guardian_Mobile" ColumnName="Guardian_Mobile" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Break_First" ColumnName="Break_First" />
+                <ScalarProperty Name="Lunch" ColumnName="Lunch" />
+                <ScalarProperty Name="Dinner" ColumnName="Dinner" />
+                <ScalarProperty Name="Extra" ColumnName="Extra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_Details">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Payment_Details">
+              <MappingFragment StoreEntitySet="Payment_Details">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Total_Amt" ColumnName="Total_Amt" />
+                <ScalarProperty Name="Paid_Amt" ColumnName="Paid_Amt" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Received_By" ColumnName="Received_By" />
+                <ScalarProperty Name="Payment_Mode" ColumnName="Payment_Mode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meals">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Meal">
+              <MappingFragment StoreEntitySet="Meal">
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Meal_Id" ColumnName="Meal_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Extra_Item">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Extra_Item">
+              <MappingFragment StoreEntitySet="Extra_Item">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Ex_Id" ColumnName="Ex_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Extra_Price" ColumnName="Extra_Price" />
+                <ScalarProperty Name="Extra" ColumnName="Extra" />
+                <ScalarProperty Name="Dinner" ColumnName="Dinner" />
+                <ScalarProperty Name="Lunch" ColumnName="Lunch" />
+                <ScalarProperty Name="Break_First" ColumnName="Break_First" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Att_Id" ColumnName="Att_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendance_Mng_View">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Attendance_Mng_View">
+              <MappingFragment StoreEntitySet="Attendance_Mng_View">
+                <ScalarProperty Name="Att_Id" ColumnName="Att_Id" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Extra_Price" ColumnName="Extra_Price" />
+                <ScalarProperty Name="Extra" ColumnName="Extra" />
+                <ScalarProperty Name="Dinner" ColumnName="Dinner" />
+                <ScalarProperty Name="Lunch" ColumnName="Lunch" />
+                <ScalarProperty Name="Break_First" ColumnName="Break_First" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Meal_Status" ColumnName="Meal_Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendance_View">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Attendance_View">
+              <MappingFragment StoreEntitySet="Attendance_View">
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Extra_Price" ColumnName="Extra_Price" />
+                <ScalarProperty Name="Extra" ColumnName="Extra" />
+                <ScalarProperty Name="Dinner" ColumnName="Dinner" />
+                <ScalarProperty Name="Lunch" ColumnName="Lunch" />
+                <ScalarProperty Name="Break_First" ColumnName="Break_First" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Meal_Status" ColumnName="Meal_Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meal_OnOff">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Meal_OnOff">
+              <MappingFragment StoreEntitySet="Meal_OnOff">
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Meal_Status" ColumnName="Meal_Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Meal_Operation">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Customer_Meal_Operation">
+              <MappingFragment StoreEntitySet="Customer_Meal_Operation">
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Req_Meal_Status" ColumnName="Req_Meal_Status" />
+                <ScalarProperty Name="Meal_Status" ColumnName="Meal_Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OnlinePayments">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.OnlinePayment">
+              <MappingFragment StoreEntitySet="OnlinePayment">
+                <ScalarProperty Name="Pay_Status" ColumnName="Pay_Status" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Tran_Id" ColumnName="Tran_Id" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Op_Id" ColumnName="Op_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monthly_Due">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Monthly_Due">
+              <MappingFragment StoreEntitySet="Monthly_Due">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Md_Id" ColumnName="Md_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Due">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Customer_Due">
+              <MappingFragment StoreEntitySet="Customer_Due">
+                <ScalarProperty Name="Payment_Mode" ColumnName="Payment_Mode" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Paid_Amt" ColumnName="Paid_Amt" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Public_Query">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.Public_Query">
+              <MappingFragment StoreEntitySet="Public_Query">
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="G_Mail" ColumnName="G_Mail" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Q_id" ColumnName="Q_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentDetails">
+            <EntityTypeMapping TypeName="Canteen_ManagementModel.PaymentDetail">
+              <MappingFragment StoreEntitySet="PaymentDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Payment_Mode" ColumnName="Payment_Mode" />
+                <ScalarProperty Name="Received_By" ColumnName="Received_By" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Paid_Amt" ColumnName="Paid_Amt" />
+                <ScalarProperty Name="Total_Amt" ColumnName="Total_Amt" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

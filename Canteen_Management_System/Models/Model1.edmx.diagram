@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b3bd9ae113a455c9af5c9da9c3668f8" Name="Diagram1" ZoomLevel="106">
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Admin_Mst" Width="1.5" PointX="21.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Amount" Width="1.5" PointX="6.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Customer" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Employee" Width="1.5" PointX="17" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Menu" Width="1.5" PointX="13.875" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Payment_Details" Width="1.5" PointX="21.125" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="Canteen_ManagementModel.FK__Amount__Alias__45F365D3" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Meal" Width="1.5" PointX="3" PointY="7.75" />
+        <AssociationConnector Association="Canteen_ManagementModel.FK__Meal__Alias__5FB337D6" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Extra_Item" Width="1.5" PointX="8.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Attendance" Width="1.5" PointX="5.875" PointY="4.25" />
+        <AssociationConnector Association="Canteen_ManagementModel.FK__Attendanc__Alias__76969D2E" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Attendance_Mng_View" Width="1.5" PointX="10.25" PointY="8.375" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Attendance_View" Width="1.5" PointX="5.5" PointY="9" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Meal_OnOff" Width="1.5" PointX="14.75" PointY="7.5" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Customer_Meal_Operation" Width="3.875" PointX="12.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.OnlinePayment" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="Canteen_ManagementModel.FK__OnlinePay__Alias__160F4887" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Monthly_Due" Width="1.5" PointX="10" PointY="1.25" />
+        <AssociationConnector Association="Canteen_ManagementModel.FK__Monthly_D__Alias__18EBB532" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Customer_Due" Width="1.5" PointX="17.625" PointY="8.625" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.Public_Query" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Canteen_ManagementModel.PaymentDetail" Width="1.5" PointX="22.5" PointY="7.375" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

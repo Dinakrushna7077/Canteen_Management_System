@@ -1,0 +1,185 @@
+﻿@model List<Canteen_Management_System.Models.Meal_OnOff>
+@{
+    ViewBag.Title = "MealOfOnRequest";
+}
+
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .row {
+        flex-wrap: wrap;
+    }
+
+    .bg-green {
+        background-color: whitesmoke;
+    }
+
+    .bg-light-gray {
+        background-color: #9cd7ff;
+    }
+
+    .alias-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .btn-att {
+        width: 4.5rem;
+        padding: 0.5rem;
+        border-radius: 4px;
+    }
+</style>
+<div id="successMessage">@TempData["successMessage"]</div>
+<div id="warningMessage">@TempData["warningMessage"]</div>
+<h2 class="text-center bg-success-subtle py-1">Meal On/Off</h2>
+<div class="container my-5">
+    
+    <div class="row mb-3 align-items-center">
+        @if (Model.Count>0)
+        {
+            <div class="col-sm-12">
+                <div class="d-flex w-100">
+                    <div class="col-sm-2">
+                        <h5 for="aliasName" class="fw-bolder text-secondary">Canteen Number</h5>
+                    </div>
+                    <div class="col-sm-2 text-start">
+                        <h5 for="aliasName" class="fw-bolder text-secondary">Name</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="breakfast" class="fw-bolder text-secondary">Date</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="breakfast" class="fw-bolder text-secondary">Request For</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="lunch" class="fw-bolder text-secondary">Reason</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="lunch" class="fw-bolder text-secondary">Action</h5>
+                    </div>
+
+                </div>
+            </div>
+        }
+        @foreach (var req in Model)
+        {
+            <div class="col-sm-12 my-3">
+                <div class="d-flex w-100">
+                    <div class="col-sm-2">
+                        <h6 for="aliasName" class="fw-bolder text-secondary">@req.Alias</h6>
+                    </div>
+                    <div class="col-sm-2 text-start">
+                        <h6 for="aliasName" class="fw-bolder text-secondary">@req.Name</h6>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h6 for="breakfast" class="fw-bolder text-secondary">@req.Date.Value.ToString("dd-MM-yyyy")</h6>
+                    </div>
+                    @if (req.Status == "Off-Req")
+                    {
+                        <div class="col-sm-2 text-center">
+                            <h6 for="breakfast" class="fw-bolder text-secondary">Off</h6>
+                        </div>
+                    }
+                    else if (req.Status == "On-Req")
+                    {
+                        <div class="col-sm-2 text-center">
+                            <h6 for="breakfast" class="fw-bolder text-secondary">On</h6>
+                        </div>
+                    }
+                    @if (req.Reason == null)
+                    {
+                        <div class="col-sm-2 text-center">
+                            <h6 for="lunch" class="fw-bolder text-secondary">- - -</h6>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-2 text-center">
+                            <h6 for="lunch" class="fw-bolder text-secondary">@req.Reason</h6>
+                        </div>
+                    }
+                    <div class="col-sm-2 text-center">
+                        <button id="req_acc_@req.Alias" class="btn bg-success fw-bolder text-white pt-0 pb-0 btn-acc">Accept</button>
+                        <button id="req_rej_@req.Alias" class="btn bg-warning fw-bolder text-white pt-0 pb-0 btn-rej">Reject</button>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        }
+    <div class="d-flex align-items-center w-100 justify-content-center">
+        @using (Ajax.BeginForm("MealOperation", "Admin", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="d-flex gap-4 justify-content-center btn-container w-100">
+                <input type="text" id="alias" name="alias" class="form-control" placeholder="Enter Canteen Number" />
+                @*@Html.TextBoxFor(m => m.Alias, new { @class = "form-control", placeholder = "Enter Canteen Number" })*@
+                <button class="w-50 btn btn-success">Check Out</button>
+            </div>
+        }
+    </div>
+        <div id="att-target">
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.btn-acc', function () {
+            var alias = $(this).attr('id').split('_')[2];
+            var button = $(this);
+            button.prop('disabled', true);
+            $.ajax({
+                url: '@Url.Action("AcceptRequest", "Admin")',
+                type: 'GET',
+                data: { alias: alias },
+                success: function (response) {
+                    $('#req_rej_' + alias).remove();
+                    $('#req_acc_').text('Accepted');
+
+                },
+                error: function (xhr, status, error) {
+                    alert("Failed To Accept Request. Please try again after some time.");
+                }
+            });
+        });
+        $(document).on('click', '.btn-rej', function () {
+            var alias = $(this).attr('id').split('_')[2];
+            var button = $(this);
+            button.prop('disabled', true);
+            $.ajax({
+                url: '@Url.Action("RejectRequest", "Admin")',
+                type: 'GET',
+                data: { alias: alias },
+                success: function (response) {
+                    $('#req_acc_' + alias).remove();
+                    $('#req_rej_').text('Rejected');
+                },
+                error: function (xhr, status, error) {
+                    alert("Failed To Accept Request. Please try again after some time.");
+                }
+            });
+        });
+    });
+</script>

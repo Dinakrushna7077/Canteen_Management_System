@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<html>
+<head>
+    <style>
+    </style>
+    @* <link href="~/Content/Site.css" rel="stylesheet" />*@
+
+</head>
+<body>
+    <div id="warningMessage">@TempData["warningMessage"]</div>
+    <div id="successMessage">@TempData["successMessage"]</div>
+    <!-- Use container-fluid for full-width layout -->
+    <div class="container my-3 mb-lg-5">
+        <!-- Carousel container with full width and 75vh height -->
+        <div id="carouselExampleSlidesOnly" class="carousel slide w-100 " data-bs-ride="carousel" style="height: 90vh;">
+            <div class="carousel-inner rounded-2" style="height: 90vh;">
+                <!-- First Slide -->
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="~/Assets/canteen3.jpeg" class="d-block w-100" alt="..." style="height: 90vh; object-fit: cover;">
+                    <div class="carousel-caption d-none d-md-block text-white mb-lg-0">
+                        <h5>First slide label</h5>
+                        <p>Serving fresh, delicious meals helps create a positive dining experience, making each meal enjoyable and satisfying.</p>
+                    </div>
+                </div>
+                <!-- Second Slide -->
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="~/Assets/canteen4.jpeg" class="d-block w-100" alt="..." style="height: 90vh; object-fit: cover;">
+                    <div class="carousel-caption d-none d-md-block text-white mb-lg-0">
+                        <h5>Second slide label</h5>
+                        <p>By offering nutritious food options, we contribute to the overall well-being of our community, helping them feel energized and healthy.</p>
+                    </div>
+                </div>
+                <!-- Third Slide -->
+                <div class="carousel-item">
+                    <img src="~/Assets/canten1.jpeg" class="d-block w-100 " alt="..." style="height: 90vh; object-fit: cover;">
+                    <div class="carousel-caption d-none d-md-block text-white">
+                        <h5>Third slide label</h5>
+                        <p>Providing a variety of tasty dishes ensures that everyone has something they love, making mealtime a time to look forward to.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev z-0" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon z-0" aria-hidden="true"></span>
+                <span class="visually-hidden z-0">Previous</span>
+            </button>
+            <button class="carousel-control-next z-0" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
+                <span class="carousel-control-next-icon z-0" aria-hidden="true"></span>
+                <span class="visually-hidden z-0">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="container my-3 mt-lg-5 pt-4">
+        <div class="row">
+            <div class="col-12">
+                <!-- Table code: Responsive table container set to full width on small screens -->
+                <div class="w-100 w-md-25 mt-3 mt-md-0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered border-primary table-hover">
+                            <caption class="text-center caption-top fs-4 fw-bolder bg-primary text-white">Food Goals</caption>
+                            <tr class="table-secondary">
+                                <th>Day</th>
+                                <th>Break First</th>
+                                <th>Meal</th>
+                                <th>Dinner</th>
+                                <th>Extra</th>
+                            </tr>
+                            <tr class="table-light">
+                                <td>Mon</td>
+                                <td>Bora/Edli/Puri+<br>Bhuguni</td>
+                                <td>Rice+Dal+Pampada+<br>Potato Chips</td>
+                                <td>Bread/Rice + Dalfry</td>
+                                <td>---</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <td>Tues</td>
+                                <td>Bora/Edli/Puri+<br>Bhuguni</td>
+                                <td>Rice+Dal+Pampada+<br>Potato Chips</td>
+                                <td>Bread/Rice+ Dalfry</td>
+                                <td>---</td>
+                            </tr>
+                            <tr class="table-light">
+                                <td>Wedness</td>
+                                <td>Bora/Edli/Puri+<br>Bhuguni</td>
+                                <td>Rice+Dal+Pampada+<br>Potato Chips</td>
+                                <td>Bread/Rice + Dalfry</td>
+                                <td>---</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <td>Thurs</td>
+                                <td>Bora/Edli/Puri+<br>Bhuguni</td>
+                                <td>Rice+Dal+Pampada+<br>Potato Chips</td>
+                                <td>Bread/Rice + Dalfry</td>
+                                <td>---</td>
+                            </tr>
+                            <tr class="table-light">
+                                <td>Fri</td>
+                                <td>Bora/Edli/Puri+<br>Bhuguni</td>
+                                <td>Rice+Dal+Pampada+<br>Potato Chips</td>
+                                <td>Bread/Rice + Dalfry</td>
+                                <td>---</td>
+                            </tr>
+                            <tr class="table-primary">
+                                <td>Satur</td>
+                                <td>Bora/Edli/Puri+<br>Bhuguni</td>
+                                <td>Rice+Dal+Pampada+<br>Potato Chips</td>
+                                <td>Bread/Rice + Dalfry</td>
+                                <td>---</td>
+                            </tr>
+                            <tr class="table-light">
+                                <td>Sun</td>
+                                <td>Bora/Edli/Puri+<br>Bhuguni</td>
+                                <td>Rice+Dal+Pampada+<br>Potato Chips</td>
+                                <td>Bread/Rice + Dalfry</td>
+                                <td>---</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="py-3 py-md-5 py-xl-8" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-10 col-lg-12">
+                    <h1 class="fs-2 mb-2 text-secondary text-uppercase">Welcome to our Canteen!</h1>
+                    <h4 class=" mb-5">
+                        <i class="fa-solid fa-arrow-right" style="color: #a8a8a8;"></i> Our canteen provides a variety of freshly prepared meals throughout the day,
+                        offering breakfast, lunch, and dinner options that cater to different tastes and dietary preferences.
+                        Whether you're starting your day with a healthy breakfast, enjoying a fulfilling lunch, or winding
+                        down with a hearty dinner, we focus on serving nutritious and delicious meals in a welcoming environment.
+                        We’re committed to making every meal a satisfying experience.
+                    </h4>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row gy-3 gy-md-4 gy-lg-0">
+                <div class="col-12 col-lg-6">
+                    <div class="card bg-light p-3 m-0">
+                        <div class="row gy-3 gy-md-0 align-items-md-center">
+                            <div class="col-md-5">
+                                <img src="~/Assets/breakfast.jpeg" class="img-fluid rounded-start" alt="Why Choose Us?">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body p-0">
+                                    <h2 class="card-title h4 mb-3 text-muted fw-bold">Breakfast : </h2>
+                                    <p class="card-text lead">
+                                        Start your day with a variety of fresh and nutritious options, including tasty idli( ଇଡ୍ଲି ),
+                                        crispy bora, savory chop(ଆଳୁ), and fluffy puri(ପୁରୀ), all beautifully prepared and designed to
+                                        give you the energy you need to tackle the day ahead.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="card bg-light p-3 m-0">
+                        <div class="row gy-3 gy-md-0 align-items-md-center">
+                            <div class="col-md-5">
+                                <img src="~/Assets/lunch.jpeg" class="img-fluid rounded-start" alt="Visionary Team">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body p-0">
+                                    <h2 class="card-title h4 mb-3 text-muted fw-bold">Lunch : </h2>
+                                    <p class="card-text lead">
+                                        Enjoy a satisfying meal with delicious options like steamed rice, flavorful lentils ( ଡାଲି ),
+                                        crispy fried vegetables ( ଭଜା ), tender chicken, savory mashed potatoes ( ଆଳୁ ଭର୍ତା ), fresh fish,
+                                        crispy mixture, and a perfectly cooked egg to keep you energized.
+
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><div class="container mt-4">
+            <div class="row gy-3 gy-md-4 gy-lg-0">
+                <div class="col-12 col-lg-6">
+                    <div class="card bg-light p-3 m-0">
+                        <div class="row gy-3 gy-md-0 align-items-md-center">
+                            <div class="col-md-5">
+                                <img src="~/Assets/dinner1.1.jpeg" class="img-fluid rounded-start" alt="Why Choose Us?">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body p-0">
+                                    <h2 class="card-title h4 mb-3 text-muted fw-bold">Dinner : </h2>
+                                    <p class="card-text lead">
+                                        Enjoy a fulfilling meal with options like soft ruti, paired with hearty soybean curry,
+                                        flavorful alu kasa, or delicious chakuli pitha. Complement your meal with steamed rice,
+                                        comforting lentils (ବୁଟ ଡାଲି), and a tasty tadka to bring the flavors together.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="card bg-light p-3 m-0">
+                        <div class="row gy-3 gy-md-0 align-items-md-center">
+                            <div class="col-md-5">
+                                <img src="~/Assets/chicken biryani.jpeg" class="img-fluid rounded-start" alt="Visionary Team">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body p-0">
+                                    <h2 class="card-title h4 mb-3 text-muted fw-bold">Extra : </h2>
+                                    <p class="card-text lead">
+                                        Enhance your meal with options like tender grilled chicken, flavorful biryani, or a freshly made egg omelette. Enjoy crispy fried fish, spicy chili gobi, rich paneer, or savory sautéed mushrooms for a satisfying and delicious addition to your meal(Extra Nonveg).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="py-3 py-md-5 py-xl-8">
+        @Html.Partial("_ContactUs")
+    </section>
+</body>
+</html>
+
+

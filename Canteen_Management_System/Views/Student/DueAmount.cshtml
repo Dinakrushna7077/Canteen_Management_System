@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Canteen_Management_System.Models.PaymentDetail>
+@{
+    ViewBag.Title = "DueAmount";
+    int i = 0;
+}
+<html>
+    <head>
+        <style>
+            
+        </style>
+    </head>
+    <body class="vh-100">
+        <h2 class="text-center">DueAmount</h2>
+        <div id="successMessage">@TempData["successMessage"]</div>
+        <div id="warningMessage">@TempData["warningMessage"]</div>
+        <div class="container my-5">
+            <div class="container my-5">
+                <table class="table">
+                    <thead>
+                        <tr class="table-secondary">
+                            <th scope="col">SI No</th>
+                            @*<th scope="col">Alias</th>*@
+                            <th scope="col">Before Pay</th>
+                            <th scope="col">Paid Amount</th>
+                            <th scope="col">Payment Method</th>
+                            <th scope="col">Received By</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var due in Model)
+                        {
+
+                            
+                                <tr class="table-success">
+                                    <th scope="row">@i</th>
+                                    <td>₹ @due.Total_Amt.Value.ToString("00.00")</td>
+                                    <td class="">₹ @due.Paid_Amt.Value.ToString("00.00")</td>
+                                    <td class="">@due.Payment_Mode</td>
+                                    <td class="">@due.Received_By</td>
+                                </tr>
+                            i++;
+                        }
+                        <tr class="table-danger">
+                            <th colspan="4">
+                                Rest Amount
+                            </th>
+                            <td>
+                                ₹@Model.FirstOrDefault().Total_Price                                  
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="w-100 text-center">
+                @Html.ActionLink("Pay Now", "Payment", "Student", new { @class = "btn-link" })
+            </div>
+        </div>
+    </body>
+</html>

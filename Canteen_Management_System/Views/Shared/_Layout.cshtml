@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Management - @ViewBag.Title</title>
+    <script src="~/Scripts/Script.js"></script>
+    <link rel="stylesheet" href="~/Content/Style.css" type="text/css" />
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/Validation.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="png" href="~/Assets/icons8-management-100.png" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-containe d-flex justify-content-between d-none d-md-flex">
+
+            <div class="d-flex align-items-center fs-3 fw-semibold">Campus Kitchen</div>
+            <nav class="z-1">
+                <ul class="nav-links">
+                    <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                    <li><a href="@Url.Action("Index","Home")#about">About</a></li>
+                    <li><a href="@Url.Action("Index","Home")#contact">Contact</a></li>
+                    @if (Session["user"] != null)
+                    {
+                        <li><a href="@Url.Action("Payment","Student")">Payment</a></li>
+                    }
+                    else if (Session["admin"] != null)
+                    {
+                        <li><a href="@Url.Action("Payment","Admin")">Cash Pay</a></li>
+                    }
+                    @if (Session["Profile"] == null)
+                    {
+                        <li>
+                            <div class="d-inline-block">
+                                <div id="menu" class="menu">Login</div>
+                                <div class="dropdown" id="drdn">
+                                    <ul id="target">
+                                        <li><a href="@Url.Action("StudentLogin","Student")">Student</a></li>
+                                        <li><a href="@Url.Action("AdminLogin","Admin")">Admin</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li id="profile-cont">
+                            <div class="d-inline-block">
+                                <div id="menu" class="profile-container">
+                                    <a id="">Menu</a>
+                                </div>
+                                <div class="dropdown" id="drdn">
+                                    <ul id="target">
+                                        @if (Session["user"] != null)
+                                        {
+                                            <li><a href="@Url.Action("Meal_On_Off","Student")">Mill On/Off</a></li>
+                                            <li><a href="@Url.Action("AttendanceRecord","Student")">Record</a></li>
+                                            <li><a href="@Url.Action("DueAmount","Student")">Due</a></li>
+                                            <li><a href="@Url.Action("Payment","Student")">Online Pay</a></li>
+                                            <li><a href="@Url.Action("ChangePassword","Student")">Change Password</a></li>
+                                        }
+                                        else if (Session["admin"] != null)
+                                        {
+                                            <li><a href="@Url.Action("NewCustomer","Admin")">New Customer</a></li>
+                                            <li><a href="@Url.Action("Attendance","Admin")">Attendance</a></li>
+                                            <li><a href="@Url.Action("MealOfOnRequest","Admin")">On/Off</a></li>
+                                            <li><a href="@Url.Action("View_Attendance","Admin")">View Record</a></li>
+                                            <li><a href="@Url.Action("PaymentRequest","Admin")">Payments</a></li>
+                                            <li><a href="@Url.Action("CustomerDue","Admin")">Due</a></li>
+                                            <li><a href="@Url.Action("New_Extra_Item","Admin")">New Extra</a></li>
+                                            <li><a href="@Url.Action("ChangePassword","Admin")">Change Password</a></li>
+                                        }
+                                        <li><a href="@Url.Action("Logout","Home")">Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="p-sm-0 p-md-1 p-lg-2" id="prof">
+                            <div class="d-flex flex-column align-items-center text-center fs-5" title="@Session["Profile"].ToString().ToUpper()">
+                                
+                                <a id="profile">
+                                    @Session["Profile"].ToString().ToUpper()
+                                </a>
+                                <ul class="dropdown-menu" id="profileDropdown">
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+        @*------------------------------Mobile View-----------------------------------------------------*@
+        <div class="d-block d-md-none">
+            <div class="nav-container  d-flex flex-row justify-content-between align-items-center">
+                <div class="fs-3 fw-semibold col-sm-6">Campus Kitchen</div>
+                <div>
+                    <div class="d-inline-block">
+                        <div id="menu_sm" class="profile-container">
+                            <i class="profile-container fa-solid fa-bars fs-1"></i>
+                        </div>
+                        <div class="dropdown z-1" id="dropdn">
+                            <ul id=" sm-drop" class="list-group d-flex flex-column gap-2">
+                                @if (Session["user"] != null || Session["admin"] != null)
+                                {
+                                    if (Session["user"] != null)
+                                    {
+                                        <li ><a href="@Url.Action("Meal_On_Off","Student")">Mill On/Off</a></li>
+                                        <li ><a href="@Url.Action("AttendanceRecord","Student")">Record</a></li>
+                                        <li ><a href="@Url.Action("DueAmount","Student")">Due</a></li>
+                                        <li ><a href="@Url.Action("Payment","Student")">Online Pay</a></li>
+                                        <li ><a href="@Url.Action("ChangePassword","Student")">Change Password</a></li>
+                                    }
+                                    else if (Session["admin"] != null)
+                                    {
+                                        <li><a href="@Url.Action("NewCustomer","Admin")">New Customer</a></li>
+                                        <li><a href="@Url.Action("Attendance","Admin")">Attendance</a></li>
+                                        <li><a href="@Url.Action("MealOfOnRequest","Admin")">On/Off</a></li>
+                                        <li><a href="@Url.Action("View_Attendance","Admin")">View Record</a></li>
+                                        <li><a href="@Url.Action("PaymentRequest","Admin")">Payments</a></li>
+                                        <li><a href="@Url.Action("CustomerDue","Admin")">Due</a></li>
+                                        <li><a href="@Url.Action("ChangePassword","Admin")">Change Password</a></li>
+                                    }
+                                    <li><a href="@Url.Action("Logout","Home")">Logout</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("StudentLogin","Student")">Student</a></li>
+                                    <li><a href="@Url.Action("AdminLogin","Admin")">Admin</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p id="foot">&copy; @DateTime.Now.Year - Campus Kitchen</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        /*-------------------------- Profile Click------------*/
+        const mn = document.getElementById("menu");
+        mn.addEventListener('click', () => {
+            let drn = document.getElementById('drdn');
+            if (drn.classList.contains("toggle-class")) {
+                drn.classList.remove("toggle-class");
+                drn.classList.add("dropdown");
+            } else {
+                drn.classList.remove("dropdown");
+                drn.classList.add("toggle-class");
+            }
+        });
+        const btn = document.getElementById("menu_sm");
+        btn.addEventListener('click', () => {
+            let drn = document.getElementById('dropdn');
+            if (drn.classList.contains("toggle-class")) {
+                drn.classList.remove("toggle-class");
+                drn.classList.add("dropdown");
+            } else {
+                drn.classList.remove("dropdown");
+                drn.classList.add("toggle-class");
+            }
+        });
+        const dropdown = document.querySelector('.dropdown');
+        document.addEventListener('click', function (event) {
+            let drn = document.getElementById('drdn');
+            let drn1 = document.getElementById('dropdn');
+            if (!dropdown.contains(event.target) && !mn.contains(event.target)) {
+                drn.classList.remove("toggle-class");
+                drn.classList.add("dropdown");
+            }
+            if (!dropdown.contains(event.target) && !menu_sm.contains(event.target)) {
+                drn1.classList.remove("toggle-class");
+                drn1.classList.add("dropdown");
+            }
+        });
+        /*-----------------------Right Click Protection hh---------------------------*/
+        document.querySelector("body").addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+        });
+        
+    </script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</body>
+</html>

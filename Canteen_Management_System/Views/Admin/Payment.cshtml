@@ -1,0 +1,26 @@
+﻿@using Canteen_Management_System.Models
+@model Payment_Details
+
+@{
+    ViewBag.Title = "Payment";
+}
+
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<div id="successMessage">@TempData["successMessage"]</div>
+<div id="warningMessage">@TempData["warningMessage"]</div>
+<div class="d-flex align-items-center w-100 justify-content-center z-0">
+    @using (Ajax.BeginForm("GetDueAmount", "Admin", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "att-target" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="d-flex gap-4 justify-content-center btn-container w-100">
+            <input type="text" id="alias" name="alias" class="form-control" placeholder="Enter Canteen Number" />
+            <button class="w-50 btn btn-success">Check Out</button>
+        </div>
+    }
+</div>
+<div id="att-target">
+
+</div>
+@*@Html.Partial("_ManualPayment")*@

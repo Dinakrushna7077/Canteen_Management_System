@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Attendance";
+}
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="successMessage">@TempData["successMessage"]</div>
+    <div id="warningMessage">@TempData["warningMessage"]</div>
+    <div class="d-flex align-items-center w-100 justify-content-center">
+        <div class="d-flex gap-4 justify-content-center btn-container">
+            @Ajax.ActionLink("Manual", "Manual", "Admin", new AjaxOptions() { HttpMethod = "get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg" }, new { @class = "manual", @id = "manual" })
+            
+        </div>
+    </div>
+    <div id="msg">
+
+    </div>
+</body>
+</html>

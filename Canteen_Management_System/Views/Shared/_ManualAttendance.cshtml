@@ -1,0 +1,351 @@
+﻿@model IEnumerable<Canteen_Management_System.Models.Attendance_Mng_View>
+@{
+    int i = 0;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        @*<form>*@
+        <div class="row mb-3 align-items-center">
+            <div class="col-sm-12">
+                <div class="d-flex w-100">
+                    <div class="col-sm-2">
+                        <h5 for="aliasName" class="fw-bolder text-secondary">AliasName</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="breakfast" class="fw-bolder text-secondary">Breakfast</h5>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        <h5 for="lunch" class="fw-bolder text-secondary">Lunch</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="dinner" class="fw-bolder text-secondary">Dinner</h5>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h5 for="extra" class="fw-bolder text-secondary">Extra</h5>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        <h5 for="extraPrice" class="fw-bolder text-secondary">RS Extra</h5>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        <h5 for="totalPrice" class="fw-bolder text-secondary">RS Total</h5>
+                    </div>
+                    <div class="col-sm-1 text-center">
+                        <h5 for="action" class="fw-bolder text-secondary">Action</h5>
+                    </div>
+                </div>
+            </div>
+            @foreach (var cust in Model)
+            {
+                i++;
+                <div class="col-sm-12 pt-1 pb-1 @(i % 2 == 0 ? "bg-green" : "bg-light-gray")">
+                    <div class="d-flex w-100 align-items-center">
+                        <div class="col-sm-2">
+                            <label class="alias-name">@cust.Alias @cust.Name</label>
+                        </div>
+                        <div class="col-sm-2 text-center d-flex justify-content-center align-items-center">
+                            <div class="d-flex me-3 gap-4 justify-content-center">
+                                @if (cust.Break_First == "Yes")
+                                {
+                                    <button disabled id="break_y_@cust.Alias" class="btn bg-success fw-bolder text-white pt-0 pb-0 breakfast-btn-y">Y</button>
+                                }
+                                else if (cust.Break_First == "No")
+                                {
+                                    <button disabled id="break_n_@cust.Alias" class="btn bg-danger fw-bolder text-white pt-0 pb-0 breakfast-btn-n">N</button>
+                                }
+                                else
+                                {
+                                    <button id="break_y_@cust.Alias" class="btn bg-success fw-bolder text-white pt-0 pb-0 breakfast-btn-y">Y</button>
+                                    <button id="break_n_@cust.Alias" class="btn bg-danger fw-bolder text-white pt-0 pb-0 breakfast-btn-n">N</button>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-1 text-center d-flex justify-content-center align-items-center">
+                            <div class="d-flex me-3 gap-4 justify-content-center">
+                                @if (cust.Lunch == "Yes")
+                                {
+                                    <button disabled id="lunch_y_@cust.Alias" class="btn bg-success fw-bolder text-white pt-0 pb-0 lunch-btn-y">Y</button>
+                                }
+                                else if (cust.Lunch == "No")
+                                {
+                                    <button disabled id="lunch_n_@cust.Alias" class="btn bg-danger fw-bolder text-white pt-0 pb-0 lunch-btn-n">N</button>
+                                }
+                                else
+                                {
+                                    <button id="lunch_y_@cust.Alias" class="btn bg-success fw-bolder text-white pt-0 pb-0 lunch-btn-y">Y</button>
+                                    <button id="lunch_n_@cust.Alias" class="btn bg-danger fw-bolder text-white pt-0 pb-0 lunch-btn-n">N</button>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-2 text-center d-flex justify-content-center align-items-center">
+                            <div class="d-flex me-3 gap-4 justify-content-center align-items-center">
+                                @if (cust.Dinner == "Yes")
+                                {
+                                    <button disabled id="din_y_@cust.Alias" class="btn bg-success fw-bolder text-white pt-0 pb-0 diner-btn-y">Y</button>
+                                }
+                                else if (cust.Dinner == "No")
+                                {
+                                    <button disabled id="din_n_@cust.Alias" class="btn bg-danger fw-bolder text-white pt-0 pb-0 diner-btn-n">N</button>
+                                }
+                                else
+                                {
+                                    <button id="din_y_@cust.Alias" class="btn bg-success fw-bolder text-white pt-0 pb-0 diner-btn-y">Y</button>
+                                    <button id="din_n_@cust.Alias" class="btn bg-danger fw-bolder text-white pt-0 pb-0 diner-btn-n">N</button>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            
+                                <div class="d-flex me-3 justify-content-center ">
+                                    @*@Html.DropDownList("", ViewBag.Extra as SelectList, "--Select--", new { @class = "form-control" })*@
+                                    @Html.DropDownListFor(m => m.Where(c => c.Alias == cust.Alias).FirstOrDefault().Extra, ViewBag.Extra as SelectList, "--Select--", new
+                               {
+                                   @class = "form-control extra-dropdown",
+                                   data_alias = cust.Alias,
+                                   @data_extra_id = "extra_" + @i,
+                                   @extraId = i,
+                                   id = "d_" + cust.Alias
+                                   /*@disabled = "disabled"*/
+                               })
+                                </div>
+                           
+                            
+                        </div>
+                        <div class="col-sm-1 text-center d-flex justify-content-center">
+                            <div class="d-flex me-3 align-items-center justify-content-center">
+                                @*<input type="text" class="form-control w-75" id="extraPrice_@cust.Alias" placeholder="Enter extra price" required>*@
+                                <lable class="form-control w-100" id="extraPrice_@cust.Alias">00.0</lable>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 text-center d-flex justify-content-center">
+                            <div class="d-flex me-3 align-items-center justify-content-center">
+
+                                @if (cust.Total_Price == 0 || cust.Total_Price == null)
+                                {
+                                    <lable class="form-control w-100" id="totalPrice_@cust.Alias">00.0</lable>
+                                }
+                                else
+                                {
+                                    <lable class="form-control w-100" id="totalPrice_@cust.Alias">
+                                        @cust.Total_Price
+                                        </lable>
+                                }
+
+
+                                </div>
+                        </div>
+                        <!-- New Action Button -->
+                        <div class="col-sm-1 text-center">
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-info extra-btn" id="action_@cust.Alias" disabled>Add Extra</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        @*</form>*@
+    </div>
+    <script>
+    $(document).ready(function () {
+        //------------------------------------------------------------------------------------------------------------Extra price ---------------------------------------
+        $('.extra-dropdown').change(function () {
+            var selectedExtra = $(this).val();
+            var alias = $(this).data('alias');
+
+            console.log('Alias:', alias);
+            var rowId = 'extraPrice_' + alias;
+            let ex_price = 0;
+            console.log('Selected Extra:', selectedExtra);
+
+            if (selectedExtra) {
+                $.ajax({
+                    url: '@Url.Action("GetExtraPrice", "Home")',
+                    type: 'GET',
+                    data: { extraId: selectedExtra },
+                    success: function (response) {
+                        console.log('Response:', response);
+                        $('#' + rowId).text(response.price);
+                        ex_price = response.price;
+                        $('#action_'+alias).prop('disabled', false);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                        alert("Failed to fetch extra price");
+                    }
+                });
+            }
+
+            $('#extraPrice_' + alias).val(ex_price);
+        });
+
+        //---------------------------------------------------------------------------------------------------------------present in breakfast--------------------------
+        $(document).on('click', '.breakfast-btn-y', function () {
+            var alias = $(this).attr('id').split('_')[2];  // Extract alias from button ID
+            /*alert(alias);*/
+            var button = $(this);
+
+            // Prevent multiple clicks
+            button.prop('disabled', true);
+            $.ajax({
+                url: '@Url.Action("BreakFastPresent", "Admin")',  // Replace with the correct URL
+                type: 'GET',
+                data: { alias: alias },  // Send alias to server
+                success: function (response) {
+                    // On success, remove the N button in the same row
+                    $('#break_n_' + alias).remove();
+                    $('#totalPrice_'+ alias).text(response.totalPrice);
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX error:', error);
+                    alert("Failed to submit attendance. Please try again after some time.");
+                }
+            });
+        });
+        //-----------------------------------------------------------------------------------------------------------------absent in Breakfast-------------------------------
+        $(document).on('click', '.breakfast-btn-n', function () {
+            var alias = $(this).attr('id').split('_')[2];
+
+            $.ajax({
+                url: '@Url.Action("BreakFastAbsent", "Admin")',
+                type: 'GET',
+                data: { alias: alias },
+                success: function (response) {
+                    $('#break_y_' + alias).remove();
+                    /*console.log(response);*/
+                },
+                error: function (xhr, status, error) {
+                    /*console.error('AJAX error:', error);*/
+                    alert("Failed to submit attendance. Please try again after some time.");
+                }
+            });
+        });
+
+        //--------------------------------------------------------------------------------------------------------------------Lunch attendance ------------------------//
+        $(document).on('click', '.lunch-btn-y', function () {
+            var alias = $(this).attr('id').split('_')[2];
+            /*alert(alias);*/
+            var button = $(this);
+
+            // Prevent multiple clicks
+            button.prop('disabled', true);
+            $.ajax({
+                url: '@Url.Action("LunchPresent", "Admin")',
+                type: 'GET',
+                data: { alias: alias },
+                success: function (response) {
+                    $('#lunch_n_' + alias).remove();
+                    $('#' + 'totalPrice_' + alias).text(response.totalPrice);
+                    /*console.log(response);*/
+                },
+                error: function (xhr, status, error) {
+                    /*console.error('AJAX error:', error);*/
+                    alert("Failed to submit attendance. Please try again after some time.");
+                }
+            });
+        });
+        $(document).on('click', '.lunch-btn-n', function () {
+            var alias = $(this).attr('id').split('_')[2];
+            /*alert(alias);*/
+            $.ajax({
+                url: '@Url.Action("LunchAbsent", "Admin")',
+                type: 'GET',
+                data: { alias: alias },
+                success: function (response) {
+                    $('#lunch_y_' + alias).remove();
+                    /*console.log(response);*/
+                },
+                error: function (xhr, status, error) {
+                    /*console.error('AJAX error:', error);*/
+                    alert("Failed to submit attendance. Please try again after some time.");
+                }
+            });
+        });
+        //--------------------------------------------------------------------------------------------------------------Dinner attendance -----------------------------------------//
+        $(document).on('click', '.diner-btn-y', function () {
+            var alias = $(this).attr('id').split('_')[2];
+            var button = $(this);
+
+            // Prevent multiple clicks
+            button.prop('disabled', true);
+            $.ajax({
+                url: '@Url.Action("DinnerPresent", "Admin")',
+                type: 'GET',
+                data: { alias: alias },
+                success: function (response) {
+                    $('#din_n_' + alias).remove();
+                    $('#' + 'totalPrice_' + alias).text(response.totalPrice);
+                    /*console.log(response);*/
+                },
+                error: function (xhr, status, error) {
+                    /*console.error('AJAX error:', error);*/
+                    alert("Failed to submit attendance. Please try again after some time.");
+                }
+            });
+        });
+        //--------------------------------------------------------------------------------------------------------------Absent for dinner--------------------------
+        $(document).on('click', '.diner-btn-n', function () {
+            var alias = $(this).attr('id').split('_')[2];
+            /*alert("Dinner N");*/
+            $.ajax({
+                url: '@Url.Action("DinnerAbsent", "Admin")',
+                type: 'GET',
+                data: { alias: alias },
+                success: function (response) {
+                    $('#din_y_' + alias).remove();
+                    /*console.log(response);*/
+                },
+                error: function (xhr, status, error) {
+                    /*console.error('AJAX error:', error);*/
+                    alert("Failed to submit attendance. Please try again after some time.");
+                }
+            });
+        });
+        //--------------------------------------------------------------------------------------------------------------apply an Extra -------------------------------------------
+        $(document).on('click', '.extra-btn', function () {
+            var alias = $(this).attr('id').split('_')[1];
+            var selectedValue=$('#d_' + alias).val();
+            
+            $.ajax({
+                url: '@Url.Action("AddExtra", "Admin")',
+                type: 'GET',
+                data: { alias: alias, extra_id:selectedValue},
+                success: function (response) {
+                    $('#' + 'totalPrice_' + alias).text(response.totalPrice);
+                    showMessage("#successMessage","Extra Added For "+alias);
+                },
+                error: function (xhr, status, error) {
+                    /*console.error('AJAX error:', error);*/
+                    $('#warningMessage').text("Extra can't be added. Please try again after some time.");
+                    showMessage("#warningMessage", "Extra can't be added. Please try again after some time.");
+                    
+                }
+            });
+        });
+    });
+        /*function showMessage(messageId) {
+            var messageText = $(messageId).text().trim();
+            if (messageText !== "") {
+                $(messageId).fadeIn();
+                setTimeout(function () {
+                    $(messageId).fadeOut();
+                }, 5000); // Hide after 5 seconds
+            }
+        }*/
+    </script>
+</body>
+</html>

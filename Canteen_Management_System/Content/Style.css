@@ -1,0 +1,484 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+/*--------------------------Nav Bar-----------------------------*/
+#profileDropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+}
+
+    /* Show dropdown when 'show' class is added */
+    #profileDropdown.show {
+        display: block;
+    }
+
+#sm-drop {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+    #sm-drop li {
+        background-color: black;
+    }
+
+        #sm-drop li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+        }
+.nav-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    height:3rem;
+    z-index:2000;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+#logo {
+    float: left;
+    font-size: 1.5em;
+}
+nav {
+    float: right;
+}
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+    .nav-links li {
+        display: inline-block;
+        margin-left: 0;
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
+    }
+#one {
+    border-left: 1px solid white;
+}
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    display: inline-block;
+    transition: background-color 0.3s;
+    border-right: 1px solid white;
+    width: 100px;
+}
+ul li:hover {
+    background-color: green;
+    transition: all 0.2s ease-in-out;
+}
+.content {
+    padding: 50px 0;
+    text-align: center;
+}
+.dropdown {
+    display: none;
+}
+.dropdown ul li {
+    display: block;
+    padding: 0.2rem 1rem 0.2rem 0rem;
+    width: 100%;
+}
+.dropdown ul{
+    margin:0;
+    padding:0;
+}
+.menu{
+    cursor: pointer;
+    padding: 10px;
+    border-right: 1px solid white;
+    width: 100px;
+}
+#target {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0;
+    background-color: #333;
+    gap: 2px;
+    margin-top: 0px;
+    z-index: 2;
+    width: 7.25rem;
+}
+    .toggle-class {
+        display: block;
+        position: absolute;
+        margin-left: 0px;
+        margin-top: 0.65rem;
+        width: 5rem;
+    }
+.sl {
+    z-index: 2;
+}
+#profile {
+    border-radius: 20%;
+    background-color: white;
+    color: white;
+    height: 3rem;
+    width: 3rem;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+#profile-cont:hover {
+    background-color: green;
+}
+#prof:hover {
+    background-color: transparent;
+    cursor:pointer;
+}
+.profile-container {
+    display: flex;
+    padding: 0px;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+}
+#target li {
+    text-align: left;
+}
+    #target li a {
+        border-right: none;
+        width: 7.25rem;
+    }
+/*----------------------------------Body--------------------------*/
+.body-content {
+    padding: 1rem;
+    min-height:100vh;
+}
+/*-------------------------Footer-------------------------*/
+footer {
+    position: absolute;
+    bottom: 2px;
+    /*background-color: #333;
+    color: #fff;*/
+    width: 100%;
+    text-align: center;
+    position: inherit;
+    bottom: 2px;
+    margin-top:5rem;
+    font-weight:bolder;
+}
+/*-------------------------------------Contact Us Page---------------------------*/
+
+#contact {
+    font-family: 'Roboto', sans-serif;
+}
+    #contact .well {
+        margin-top: 30px;
+        border-radius: 0;
+    }
+    #contact .form-control {
+        border-radius: 0;
+        border: 2px solid #1e1e1e;
+    }
+    #contact button {
+        border-radius: 0;
+        border: 2px solid #1e1e1e;
+    }
+    #contact .row {
+        margin-bottom: 30px;
+    }
+@media (max-width: 768px) {
+    #contact iframe {
+        margin-bottom: 15px;
+    }
+}
+#successMessage {
+    display: none;
+    position: fixed;
+    top: 4.5rem;
+    right: 0px;
+    padding: 15px;
+    background-color: #4CAF50; 
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 300px; 
+    word-wrap: break-word; 
+    overflow: hidden;
+    white-space: normal;
+}
+/* Popup style for warning message (top-right) */
+#warningMessage {
+    display: none;
+    position: fixed;
+    top: 4.5rem;
+    right: 0px;
+    padding: 15px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 400px;
+    word-wrap:break-word; 
+    overflow: hidden;
+    white-space: normal;
+}
+/*Cricial slide */
+#slide {
+    height: 30rem;
+    border-radius: 1rem;
+    width: 100%; 
+}
+@media (min-width: 768px) {
+    #slide {
+        max-width: 45rem; 
+    }
+}
+/*------------------------------View attendance-------------------*/
+@media (max-width: 768px) {
+    .alias-name {
+        font-size: 0.8rem;
+        white-space: normal;
+    }
+    .btn-att {
+        font-size: 0.75rem;
+        width: 3rem;
+    }
+    .d-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .col-sm-2, .col-sm-1 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .col-sm-2 {
+        width: 100%;
+    }
+    .col-sm-1 {
+        width: 50%;
+    }
+    .col-sm-12 {
+        width: 100%;
+    }
+}
+/*-----------------------------Payment.cshtml----------------------------*/
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.h-custom {
+    height: calc(100% - 73px);
+}
+.pay-form-cont {
+    border-radius: 5px;
+    z-index: 2;
+}
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+/*-------------------------Meal On Off------------------------*/
+.warning {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+.on-off {
+    border-radius: 8px;
+}
+/*_--------------------------Due Amount----------------------------*/
+.brdr {
+    border: 2px solid black;
+}
+/*----------------------------Change Password ---------------------*/
+.pass-form {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    width: 40%;
+}
+/*----------------------------View Record---------------------------Partial View----*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-height: 80vh;
+    /*overflow-y: auto;*/
+}
+
+.row {
+    flex-wrap: wrap;
+}
+
+.bg-green {
+    background-color: whitesmoke;
+}
+
+.bg-light-gray {
+    background-color: #9cd7ff;
+}
+
+.alias-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-att {
+    width: 4.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+/*----------------------------------Manual Attendance ------------------Partial View----*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.row {
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.bg-green {
+    background-color: whitesmoke;
+}
+
+.bg-light-gray {
+    background-color: lightgray;
+}
+
+.alias-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*.breakfast-btn-n, .breakfast-btn-n, .lunch-btn-n, .lunch-btn-y, .diner-btn-n, .diner-btn-y{
+            transform:rotate3d(180deg);
+        }*/
+/*.present{
+            background-color:forestgreen;
+            color:white;
+            width:100%;
+        }
+        .absent{
+            background-color:orangered;
+            color:white;
+            width:100%;
+        }*/
+/*--------------------------Index.cshtml -----------------Home Page------------------------*/
+#slide {
+    /*height: 30rem;*/
+    border-radius: 1rem;
+    width: 100%; /* Allow the element to use all available width */
+    /*max-width: 100%;*/ /* But never exceed 45rem */
+    height: 100%;
+}
+
+table {
+    font-size: 14px;
+    width: 100%;
+}
+
+td, th {
+    padding: 0.3rem;
+}
+
+#map {
+    width: 100%;
+}
+
+.map-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0;
+    padding: 0;
+}
+
+/*--------------------------Attendance.cshtml -----------------Home Page------------------------*/
+.manual, .auto-btn, .absent-btn, .present-btn {
+    padding: 0.2rem 1rem 0.2rem 1rem;
+    background-color: darkorange;
+    color: black;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bolder;
+    height: 2rem;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.absent-btn, .present-btn {
+    background-color: lawngreen;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.btn-container {
+    transition: transform 0.5s ease;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+.shift-left {
+    transform: translateX(-1rem);
+}
+/*----------------------Change Password------------------*/
+.pass-form {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    width: 40%;
+}

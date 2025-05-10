@@ -1,0 +1,61 @@
+﻿@using Canteen_Management_System.Models
+@model OnlinePayment
+@{
+    ViewBag.Title = "PayMent";
+}
+<style>
+</style>
+<div id="successMessage">@TempData["successMessage"]</div>
+<div id="warningMessage">@TempData["warningMessage"]</div>
+<section class="vh-100 z-0">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5 text-center">
+                <h4 class="text-center">Scan And Pay</h4>
+                <img src="~/Assets/scanner.jpg"
+                     class="img-fluid" alt="Scanner image">
+                <div>
+                    <b>Canteen Management</b>
+                </div>
+                <div>
+                    <i>canteenmanagementsystem@ibl</i>
+                </div>
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 bg-success-subtle p-2 pay-form-cont">
+                @using (Html.BeginForm("Payment", "Student", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="text-center mt-2">
+                        <b class="text-center fs-5">Capture a snap Send Request</b>
+                    </div>
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0"></p>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="file" name="File" id="ss" class="form-control form-control-lg" />
+
+                        <label class="form-label" for="ss">Screenshoot</label>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        @Html.EditorFor(x => x.Tran_Id, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "Transaction ID", @id = "transaction" } })
+                        <label class="form-label" for="form3Example3">Transaction ID</label>
+                    </div>
+                    <div data-mdb-input-init class="form-outline mb-3">
+                        @Html.EditorFor(x => x.Amount, new { htmlAttributes = new { @class = "form-control form-control-lg", @placeholder = "00.00", @id = "amount" } })
+                        <label class="form-label" for="form3Example4">Amount</label>
+                    </div>
+
+
+
+                    <div class="text-center mt-4 pt-2 w-100">
+                        <button type="submit" class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                            Send
+                        </button>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</section>

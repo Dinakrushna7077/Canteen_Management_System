@@ -1,0 +1,60 @@
+﻿
+@model List<Canteen_Management_System.Models.Amount>
+@{
+    ViewBag.Title = "CustomerDue";
+    int i = 1;
+}
+<html>
+<head>
+</head>
+<body class="vh-100">
+
+    <h2>DueAmount</h2>
+    <div id="successMessage">@TempData["successMessage"]</div>
+    <div id="warningMessage">@TempData["warningMessage"]</div>
+    <div class="container my-5">
+        <table class="table">
+            <thead>
+                <tr class="table-secondary">
+                    <th scope="col">SI No</th>
+                    <th scope="col">Canteen Number</th>
+                    <th scope="col">Pending Amount</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var due in Model)
+                {
+
+                    if (due.Total_Price > 500)
+                    {
+                        <tr class="table-danger">
+                            <th scope="row">@i</th>
+                            <td>@due.Alias</td>
+                            <td class="">₹ @due.Total_Price.Value.ToString("00.00")</td>
+                        </tr>
+                        
+                    }
+                    else
+                    {
+                        <tr class="table-primary">
+                            <th scope="row">@i</th>
+                            <td>@due.Alias</td>
+                            <td class="">₹ @due.Total_Price.Value.ToString("00.00")</td>
+                        </tr>
+                    }
+                    i++;
+                }
+            </tbody>
+        </table>
+        @*<form>*@
+        
+        @*<div class="w-100 text-center mt-5">
+            @Html.ActionLink("Update Calculation", "DueCalculate", "Admin", new { @class = " btn btn-light" })
+        </div>*@
+        <div class="w-100 text-center">
+            @Html.ActionLink("Pay Now", "Payment", "Student", new { @class = "btn-link" })
+        </div>
+    </div>
+</body>
+</html>

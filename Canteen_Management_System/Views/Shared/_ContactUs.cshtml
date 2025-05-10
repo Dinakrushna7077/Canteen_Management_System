@@ -1,0 +1,46 @@
+﻿
+@using Canteen_Management_System.Models
+@model Public_Query
+
+
+<div class="container d-flex flex-column bg-light rounded-2 border-1">
+    <div class="well well-sm">
+        <h3><strong>Contact Us</strong></h3>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7 map-container">
+            <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14101.33922172645!2d86.3578077!3d20.8125836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a29a08d6d47c877%3A0xc5c27697d4ca5133!2sBOI%20near%20Chitalo%20Mahavidyalaya%2C%20Chitalo%2C%20Odisha%2C%20India!5e0!3m2!1sen!2sus!4v1678230167856!5m2!1sen!2sus" height="315" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+
+        <div class="col-md-5">
+            <h4><strong>Get in Touch</strong></h4>
+            @using (Html.BeginForm("PublicQuery", "Home", FormMethod.Post))
+            {
+                <div class="form-group mb-2">
+                    
+                    @Html.EditorFor(x => x.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name"} })
+                </div>
+                <div class="form-group mb-2">
+                    @Html.EditorFor(x => x.G_Mail, new { htmlAttributes = new { @class = "form-control", @placeholder = "E-mail"}, @type="email" })
+                </div>
+                <div class="form-group mb-2">
+                    @Html.EditorFor(x => x.Mobile, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone Number"} })
+                </div>
+                <div class="form-group mb-2">
+                    @Html.EditorFor(x => x.Query, new { htmlAttributes = new { @class = "form-control w-100 h-25", @placeholder = "Message" , @id="tarea" } })
+                    
+                </div>
+                <button class="btn btn-default" type="submit" name="button">
+                    <i class="fa-solid fa-paper-plane"></i> Submit
+                </button>
+            }
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-2 text-primary">
+        <div>
+            <p>Mobile : +91 0000000000 </p>
+            <p>Email : campuskitchen78@gmail.com</p>
+        </div>
+    </div>
+</div>
