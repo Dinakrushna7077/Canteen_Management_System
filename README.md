@@ -1,8 +1,15 @@
 # Canteen Management System
-<h1>Graduation Project</h1>
 <p>
-  A project on canteen management system to reduce the effort of manualy maintaining canteen operations. This project is based on our college canteen( Bajramakala Canteen)
+  A project on canteen management system to reduce the effort of manualy maintaining canteen operations. This project is based on our college canteen( Bajramakala Canteen). I Created This project During Final Year Of My Graduation
 </p>
+<h5>Technology</h5>
+<ul>
+  <li>Framework : .Net 8</li>
+  <li>ASP .Net MVC</li>
+  <li>html,css,js</li>
+  <li>C Sharp</li>
+  <li>MS SQL Server</li>
+</ul>
 <hr>
 <h4>Users</h4>
 <ul>
